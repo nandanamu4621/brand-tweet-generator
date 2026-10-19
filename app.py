@@ -88,14 +88,16 @@ def index():
             try:
                 print("Connecting to Ollama Cloud...")
 
+                api_key = os.getenv("OLLAMA_API_KEY", "").strip()
+
+                print("OLLAMA_API_KEY exists:", bool(api_key))
+                print("OLLAMA_API_KEY length:", len(api_key))
+
                 client = Client(
                     host="https://ollama.com",
-                    headers={
-                        "Authorization": (
-                            f"Bearer {os.getenv('OLLAMA_API_KEY')}"
-                        )
-                    }
+                    headers={"Authorization": f"Bearer {api_key}"}
                 )
+                    
 
                 print("Generating 10 tweets...")
 
